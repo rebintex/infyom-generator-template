@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::resource('categories', App\Http\Controllers\CategoryController::class, ["as" => 'admin']);
+    Route::resource('products', App\Http\Controllers\ProductController::class, ["as" => 'admin']);
+});
+
+
+
